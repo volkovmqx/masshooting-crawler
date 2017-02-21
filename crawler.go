@@ -40,11 +40,11 @@ type Cordinnates struct {
 
 // Client : client informations
 type Client struct {
-	Imei         string
-	LastKnownLat float64
-	LastKnownLng float64
-	Token        string
-	Range        float64
+	Imei  string
+	Lat   float64
+	Lng   float64
+	Token string
+	Range float64
 }
 
 func getHref(t html.Token) (ok bool, href string) {
@@ -121,7 +121,7 @@ func Distance(lat1, lon1, lat2, lon2 float64) float64 {
 }
 
 func isInRange(client Client, accident Incident) (isInRange bool, distance float64) {
-	distance = Distance(client.LastKnownLat, client.LastKnownLng, accident.Lat, accident.Lng)
+	distance = Distance(client.Lat, client.Lng, accident.Lat, accident.Lng)
 	if distance <= client.Range {
 		isInRange = true
 	} else {
